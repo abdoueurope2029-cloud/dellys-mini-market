@@ -92,6 +92,11 @@ const db = new sqlite3.Database('./database.db', (err) => {
 // Use product routes
 app.use('/products', productRoutes);
 
+// Root route to serve index.html
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
