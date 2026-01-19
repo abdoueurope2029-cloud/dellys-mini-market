@@ -28,7 +28,8 @@ app.use((req, res, next) => {
 });
 
 // Initialize SQLite database
-const db = new sqlite3.Database('./database.db', (err) => {
+const dbPath = path.join(__dirname, 'database.db');
+const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error(err.message);
   } else {
