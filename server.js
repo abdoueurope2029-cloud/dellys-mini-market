@@ -17,12 +17,8 @@ app.use(express.static('public'));
 app.use('/uploads', express.static('uploads'));
 
 // Ensure uploads directory exists
-const uploadsDir = process.env.NODE_ENV === 'production' ? 
-  '/opt/render/project/src/uploads' : 
-  'uploads';
-
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir, { recursive: true });
+if (!fs.existsSync('uploads')) {
+  fs.mkdirSync('uploads');
 }
 
 // Database middleware to make db accessible in routes
@@ -32,11 +28,7 @@ app.use((req, res, next) => {
 });
 
 // Initialize SQLite database
-const dbPath = process.env.NODE_ENV === 'production' ? 
-  '/opt/render/project/src/database.db' : 
-  './database.db';
-
-const db = new sqlite3.Database(dbPath, (err) => {
+const db = new sqlite3.Database('./database.db', (err) => {
   if (err) {
     console.error(err.message);
   } else {

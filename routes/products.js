@@ -7,10 +7,7 @@ const fs = require('fs');
 // Configure multer for file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const uploadsDir = process.env.NODE_ENV === 'production' ? 
-      '/opt/render/project/src/uploads' : 
-      'uploads';
-    cb(null, uploadsDir);
+    cb(null, 'uploads/');
   },
   filename: function (req, file, cb) {
     // Create unique filename
@@ -117,10 +114,7 @@ router.delete('/:id', (req, res) => {
 
       // If the product had an image, try to delete it
       if (row.image && row.image.startsWith('/uploads/')) {
-        const basePath = process.env.NODE_ENV === 'production' ? 
-          '/opt/render/project/src' : 
-          path.join(__dirname, '..');
-        const imagePath = path.join(basePath, row.image);
+        const imagePath = path.join(__dirname, '..', row.image);
         fs.unlink(imagePath, (err) => {
           if (err) {
             console.error('Failed to delete image:', err);
