@@ -1,0 +1,14 @@
+services:
+  # A Node.js web service
+  - type: web
+    name: dellys-mini-market
+    env: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_VERSION
+        value: 18.17.0
+    disk:
+      name: uploads
+      mountPath: /opt/render/project/src/uploads
+      sizeGB: 1
