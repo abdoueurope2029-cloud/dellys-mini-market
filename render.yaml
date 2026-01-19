@@ -3,9 +3,11 @@ services:
     name: dellys-mini-market
     env: node
     region: frankfurt
+    plan: free
     buildCommand: "npm install"
     startCommand: "npm start"
     autoDeploy: true
+    healthCheckPath: /
     envVars:
       - key: NODE_ENV
         value: production
